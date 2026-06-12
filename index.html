@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#1ed760" />
+  <title>Nossa Retrospectiva ❤️</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     TELA SPLASH — "Toque para começar"
+══════════════════════════════════════════ -->
+<div id="splash" class="screen active">
+  <canvas id="particles-canvas"></canvas>
+  <div class="splash-content">
+    <div class="heart-logo">💕</div>
+    <h1 class="splash-title">Eu i vc<br>Wrapped</h1>
+    <p class="splash-sub">Eu i você e mais eu e mais você, que bom</p>
+    <button id="start-btn" class="btn-start">
+      <span class="btn-icon">▶</span>
+      Aperta no meu botãozinho ❤️
+    </button>
+    <p class="splash-hint">🎧</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PLAYER DE MÚSICA (fixo no canto)
+══════════════════════════════════════════ -->
+<div id="music-player" class="music-player hidden">
+  <button id="music-toggle" class="music-btn" title="Pausar / Retomar">
+    <span id="music-icon">⏸</span>
+  </button>
+  <div class="music-info">
+    <span class="music-note">♪</span>
+    <span id="music-label">Those Eyes</span>
+  </div>
+  <input id="volume-slider" type="range" min="0" max="1" step="0.05" value="0.7" class="vol-slider" />
+</div>
+
+<!-- ══════════════════════════════════════════
+     NAVEGAÇÃO (bolinhas laterais)
+══════════════════════════════════════════ -->
+<nav id="slide-nav" class="slide-nav hidden">
+  <!-- Gerado via JS -->
+</nav>
+
+<!-- ══════════════════════════════════════════
+     WRAPPER DE SLIDES
+
+══════════════════════════════════════════ -->
+<div id="slides-wrapper" class="slides-wrapper hidden">
+
+  <!-- ── SLIDE 1: Introdução ─────────────────── -->
+  <section class="slide slide-intro" data-index="0">
+    <canvas class="slide-particles"></canvas>
+    <div class="slide-content">
+      <div class="intro-badge">Oi! Hello World! Testando Html</div>
+      <h2 class="intro-title">Oi Ash, aqui nesse site você pode capturar todos os pokémons tá?<br></h2>
+      <p class="intro-sub">Vai ter algumas coisinhas legais no site tá? Prometo</p>
+      <button class="btn-next slide-btn" id="mudar">Começa logo, porra!</button>
+    </div>
+    <div class="slide-gradient"></div>
+  </section>
+
+  <!-- ── SLIDE 2: Nossa Jornada ──────────────── -->
+  <section class="slide slide-journey" data-index="1">
+    <div class="slide-content">
+      <div class="section-chip">Foi aqui</div>
+      <div id="journey-photo-wrap" class="journey-photo-wrap">
+        <img id="journey-photo" src="" alt="Nós duas" loading="lazy" />
+        <div class="photo-glow"></div>
+      </div>
+      <div class="journey-stats">
+        <div class="jstat">
+          <span class="jstat-num" id="days-counter">0</span>
+          <span class="jstat-label">dias de eu e vc</span>
+        </div>
+        <div class="jstat-sep">·</div>
+        <div class="jstat">
+          <span class="jstat-num" id="met-date-display">—</span>
+        </div>
+      </div>
+      <p id="journey-message" class="journey-message"></p>
+      <button class="btn-next slide-btn">Próximo →</button>
+    </div>
+  </section>
+
+  <!-- ── SLIDE 3: Melhores Momentos ─────────── -->
+  <section class="slide slide-moments" data-index="2">
+    <div class="slide-content">
+      <div class="section-chip">📸 Nossas NFT's lendárias</div>
+      <div class="carousel-wrap">
+        <div id="carousel" class="carousel">
+          <!-- Gerado via JS -->
+        </div>
+        <div class="carousel-dots" id="carousel-dots"></div>
+        <button class="carousel-btn prev" id="prev-btn">‹</button>
+        <button class="carousel-btn next" id="next-btn">›</button>
+      </div>
+      <p id="carousel-caption" class="carousel-caption"></p>
+      <button class="btn-next slide-btn">Próximo →</button>
+    </div>
+  </section>
+
+  <!-- ── SLIDE 4: Estatísticas ───────────────── -->
+  <section class="slide slide-stats" data-index="3">
+    <div class="slide-content">
+      <div class="section-chip">Pra mim lembrar</div>
+      <h3 class="stats-title">Counter da nossa lore aqui</h3>
+      <div class="stats-grid">
+        <div class="stat-card" data-val="days">
+          <div class="stat-icon">👩‍❤️‍👩</div>
+          <div class="stat-num" id="stat-days">0</div>
+          <div class="stat-name">Dias juntas</div>
+        </div>
+        <div class="stat-card" data-val="photos">
+          <div class="stat-icon">📸</div>
+          <div class="stat-num" id="stat-photos">0</div>
+          <div class="stat-name">Fotos tiradas</div>
+        </div>
+        <div class="stat-card" data-val="calls">
+          <div class="stat-icon">📞</div>
+          <div class="stat-num" id="stat-calls">0</div>
+          <div class="stat-name">Calls</div>
+        </div>
+        <div class="stat-card" data-val="specials">
+          <div class="stat-icon">🌟</div>
+          <div class="stat-num" id="stat-specials">0</div>
+          <div class="stat-name">Momentos especiais</div>
+        </div>
+      </div>
+      <div class="fun-fact-box">
+        <p id="fun-fact" class="fun-fact-text"></p>
+      </div>
+      <button class="btn-next slide-btn">Próximo →</button>
+    </div>
+  </section>
+
+  <!-- ── SLIDE 5: Coisas Que Eu Amo ─────────── -->
+  <section class="slide slide-loves" data-index="4">
+    <div class="slide-content">
+      <div class="section-chip">Eu amooooooooo</div>
+      <h3 class="loves-title"></h3><br>AmoAmoAmo</h3>
+      <div id="loves-grid" class="loves-grid">
+        <!-- Gerado via JS -->
+      </div>
+      <button class="btn-next slide-btn">Próximo →</button>
+    </div>
+  </section>
+
+  <!-- ── SLIDE 6: Timeline ───────────────────── -->
+  <section class="slide slide-timeline" data-index="5">
+    <div class="slide-content">
+      <div class="section-chip">Agora é a Lore certinho</div>
+      <h3 class="timeline-title">Timeline fofa <br> cute cute</h3>
+      <div id="timeline" class="timeline">
+        <!-- Gerado via JS -->
+      </div>
+      <button class="btn-next slide-btn">Próximo →</button>
+    </div>
+  </section>
+
+  <!-- ── SLIDE 7: Carta ──────────────────────── -->
+  <section class="slide slide-letter" data-index="6">
+    <div class="slide-content">
+      <div class="section-chip">🦅 Olha a mensagem</div>
+      <div class="letter-wrap">
+        <div class="letter-paper">
+          <p id="letter-greeting" class="letter-greeting"></p>
+          <p id="letter-body" class="letter-body"></p>
+          <p id="letter-sign" class="letter-sign"></p>
+        </div>
+      </div>
+      <button class="btn-next slide-btn">Próximo →</button>
+    </div>
+  </section>
+
+  <!-- ── SLIDE 8: Encerramento ───────────────── -->
+  <section class="slide slide-ending" data-index="7">
+    <canvas class="slide-particles" id="ending-particles"></canvas>
+    <div class="slide-content">
+      <div id="floating-hearts" class="floating-hearts"></div>
+      <div class="ending-logo">💕</div>
+      <h2 id="ending-message" class="ending-message"></h2>
+      <p id="ending-sub" class="ending-sub"></p>
+      <button class="btn-restart" id="restart-btn">↺ Recomeçar</button>
+    </div>
+  </section>
+
+</div><!-- /slides-wrapper -->
+
+<!-- Audio -->
+<audio id="bg-audio" loop preload="none"></audio>
+
+<script src="config/data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
